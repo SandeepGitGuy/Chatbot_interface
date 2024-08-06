@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Append AI's response to the chat box
             if (aiResponse) {
-                chatBox.innerHTML += `<div class="ai-message"><strong>AI:</strong> ${aiResponse}</div>`;
+                chatBox.innerHTML += `<div class="ai-message"><strong>Trip Sage:</strong> ${aiResponse}</div>`;
                 chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
             } else {
                 throw new Error('No AI response found in the data');
