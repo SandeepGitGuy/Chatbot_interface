@@ -4,18 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot Interface</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        #chat-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        .user-message {
+            text-align: right;
+            margin: 5px 0;
+        }
+        .ai-message {
+            text-align: left;
+            margin: 5px 0;
+        }
+        .error-message {
+            text-align: center;
+            color: red;
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div id="chatbox" class="chatbox">
-            <!-- Chat messages will be appended here -->
-        </div>
-        <div class="input-container">
-            <input type="text" id="userInput" placeholder="Type your message here...">
-            <button onclick="sendMessage()">Send</button>
-        </div>
-    </div>
+    <div id="chat-box"></div>
+    <form id="chat-form">
+        <input type="text" id="user-input" required>
+        <button type="submit">Send</button>
+    </form>
     <script src="script.js"></script>
 </body>
 </html>
