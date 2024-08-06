@@ -23,8 +23,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({ message: userMessage })
             });
 
+            // Check if response is okay
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
             const data = await response.json();
-            
+
             // Append the AI's response to the chat box
             chatBox.innerHTML += `<div class="ai-message"><strong>AI:</strong> ${data.response}</div>`;
         } catch (error) {
