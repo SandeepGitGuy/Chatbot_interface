@@ -8,12 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const userMessage = userInput.value;
         
+        // Append the user's message to the chat box
         chatBox.innerHTML += `<div class="user-message"><strong>You:</strong> ${userMessage}</div>`;
         
+        // Clear the input field
         userInput.value = '';
 
         try {
-            console.log('Sending request with message:', userMessage);
+            // Send request to the API
             const response = await fetch('https://ssqws0bitc.execute-api.ap-southeast-1.amazonaws.com/Dev/chat', {
                 method: 'POST',
                 headers: {
@@ -27,16 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const data = await response.json();
-            console.log('Raw response data:', data);
 
+            // Extract AI response
             let aiResponse;
             if (typeof data.body === 'string') {
                 try {
                     const parsedBody = JSON.parse(data.body);
-                    console.log('Parsed body:', parsedBody);
                     aiResponse = parsedBody.response;
-                } catch (parseError) {
-                    console.error('Error parsing body:', parseError);
+                } catch {
                     aiResponse = data.body;
                 }
             } else if (data.body && data.body.response) {
@@ -47,16 +47,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Unexpected response format');
             }
 
-            console.log('AI Response:', aiResponse);
-
+            // Append AI's response to the chat box
             if (aiResponse) {
                 chatBox.innerHTML += `<div class="ai-message"><strong>AI:</strong> ${aiResponse}</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
             } else {
                 throw new Error('No AI response found in the data');
             }
 
         } catch (error) {
-            console.error('Error:', error);
+            // Handle errors
             chatBox.innerHTML += `<div class="error-message"><strong>Error:</strong> ${error.message}</div>`;
         }
     });
