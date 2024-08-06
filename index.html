@@ -3,35 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot Interface</title>
-    <style>
-        #chat-box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            height: 300px;
-            overflow-y: scroll;
-        }
-        .user-message {
-            text-align: right;
-            margin: 5px 0;
-        }
-        .ai-message {
-            text-align: left;
-            margin: 5px 0;
-        }
-        .error-message {
-            text-align: center;
-            color: red;
-            margin: 5px 0;
-        }
-    </style>
+    <title>Stylized Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="chat-box"></div>
-    <form id="chat-form">
-        <input type="text" id="user-input" required>
-        <button type="submit">Send</button>
-    </form>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h2>Chat with Us</h2>
+        </div>
+        <div id="chat-box" class="chat-box"></div>
+        <form id="chat-form" class="chat-form">
+            <input type="text" id="user-input" class="chat-input" placeholder="Type your message here...">
+            <button type="submit" class="chat-button">Send</button>
+        </form>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
