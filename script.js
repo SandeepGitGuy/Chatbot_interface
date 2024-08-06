@@ -29,9 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const data = await response.json();
+            
+            // Parse the 'body' of the response, which is a string
+            const parsedBody = JSON.parse(data.body);
+            
+            // Now we can access the 'response' key
+            chatBox.innerHTML += `<div class="ai-message"><strong>AI:</strong> ${parsedBody.response}</div>`;
 
-            // Append the AI's response to the chat box
-            chatBox.innerHTML += `<div class="ai-message"><strong>AI:</strong> ${data.response}</div>`;
         } catch (error) {
             console.error('Error:', error);
             chatBox.innerHTML += `<div class="error-message"><strong>Error:</strong> Could not get a response from the server.</div>`;
