@@ -20,8 +20,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    margin-left: auto; /* Pushes the chat container to the right */
-    margin-right: 0; /* Ensures no extra margin on the right */
+    margin-left: auto; /* Pushes the chat container to the right */ /* Ensures no extra margin on the right */
     margin-right: 20px;
 }
 
@@ -91,4 +90,22 @@ body {
 
 .chat-button:hover {
     background: #0056b3;
+}
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.typing-effect {
+    overflow: hidden; /* Ensures text doesn't overflow */
+    white-space: nowrap; /* Keeps text on a single line */
+    border-right: 2px solid black; /* Cursor effect */
+    animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: black; }
 }
