@@ -22,6 +22,7 @@ body {
     flex-direction: column;
     margin-left: auto; /* Pushes the chat container to the right */
     margin-right: 0; /* Ensures no extra margin on the right */
+    margin-right: 20px;
 }
 
 .chat-header {
