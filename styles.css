@@ -91,21 +91,31 @@ body {
 .chat-button:hover {
     background: #0056b3;
 }
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
 
 .typing-effect {
-    overflow: hidden; /* Ensures text doesn't overflow */
-    white-space: pre-wrap; /* Allows text to wrap onto the next line */
-    animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
+    overflow: hidden;
+    border-right: 2px solid transparent; /* This creates a blinking cursor effect */
+    white-space: pre-wrap;
+    margin: 0;
+    line-height: 1.5;
 }
 
 @keyframes blink-caret {
     from, to { border-color: transparent; }
-    50% { border-color: transparent; } /* No visible caret */
+    50% { border-color: black; }
+}
+
+.typing-line {
+    display: none;
+}
+
+.typing-line.visible {
+    display: block;
+    animation: typing 1.5s steps(40, end);
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
 }
 
