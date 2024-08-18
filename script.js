@@ -47,10 +47,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Unexpected response format');
             }
 
-            // Append AI's response to the chat box
+            // Append AI's response to the chat box and apply typing effect
             if (aiResponse) {
-                chatBox.innerHTML += `<div class="ai-message"><strong>Trip Sage:</strong> ${aiResponse}</div>`;
+                const aiMessageDiv = document.createElement('div');
+                aiMessageDiv.classList.add('ai-message', 'typing-effect');
+                aiMessageDiv.innerHTML = `<strong>Trip Sage:</strong> `;
+                chatBox.appendChild(aiMessageDiv);
                 chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+
+                // Function to simulate typing effect
+                function typeWriter(element, text, speed) {
+                    let i = 0;
+                    let lines = text.split('\n'); // Split text by lines
+                    let lineIndex = 0;
+                    let charIndex = 0;
+
+                    function typeLine() {
+                        if (lineIndex < lines.length) {
+                            if (charIndex < lines[lineIndex].length) {
+                                element.innerHTML += lines[lineIndex].charAt(charIndex);
+                                charIndex++;
+                                setTimeout(typeLine, speed);
+                            } else {
+                                element.innerHTML += '<br>'; // Add a line break after each line
+                                lineIndex++;
+                                charIndex = 0;
+                                setTimeout(typeLine, speed); // Wait a bit before starting the next line
+                            }
+                        }
+                    }
+
+                    typeLine();
+                }
+
+                typeWriter(aiMessageDiv, aiResponse, 50); // Adjust speed as needed
             } else {
                 throw new Error('No AI response found in the data');
             }
