@@ -3,6 +3,39 @@ document.addEventListener('DOMContentLoaded', function() {
     const userInput = document.getElementById('user-input');
     const chatBox = document.getElementById('chat-box');
 
+    // Function to simulate typing effect
+    function typeWriter(element, text, speed) {
+        let i = 0;
+        let lines = text.split('\n'); // Split text by lines
+        let lineIndex = 0;
+        let charIndex = 0;
+
+        function typeLine() {
+            if (lineIndex < lines.length) {
+                if (charIndex < lines[lineIndex].length) {
+                    element.innerHTML += lines[lineIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeLine, speed);
+                } else {
+                    element.innerHTML += '<br>'; // Add a line break after each line
+                    lineIndex++;
+                    charIndex = 0;
+                    setTimeout(typeLine, speed); // Wait a bit before starting the next line
+                }
+            }
+        }
+
+        typeLine();
+    }
+
+    // Apply typing effect to the introductory message
+    const introMessage = document.querySelector('.ai-message.typing-effect');
+    if (introMessage) {
+        const introText = introMessage.textContent.trim();
+        introMessage.innerHTML = ''; // Clear existing text
+        typeWriter(introMessage, introText, 50); // Adjust speed as needed
+    }
+
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
         
@@ -50,42 +83,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // Append AI's response to the chat box and apply typing effect
             if (aiResponse) {
                 const aiMessageDiv = document.createElement('div');
-                aiMessageDiv.classList.add('ai-message');
-                aiMessageDiv.innerHTML = `<strong>Trip Sage:</strong> <span class="typing-effect"></span>`;
+                aiMessageDiv.classList.add('ai-message', 'typing-effect');
+                aiMessageDiv.innerHTML = `<strong>Trip Sage:</strong> `;
                 chatBox.appendChild(aiMessageDiv);
                 chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
 
                 // Function to simulate typing effect
-                function typeWriter(element, text, speed) {
-                    let i = 0;
-                    let lines = text.split('\n'); // Split text by lines
-                    let lineIndex = 0;
-
-                    function typeLine() {
-                        if (lineIndex < lines.length) {
-                            let line = lines[lineIndex];
-                            let charIndex = 0;
-                            const typingInterval = setInterval(() => {
-                                if (charIndex < line.length) {
-                                    element.innerHTML += line.charAt(charIndex);
-                                    charIndex++;
-                                } else {
-                                    clearInterval(typingInterval);
-                                    element.innerHTML += '<br>'; // Add a line break after each line
-                                    lineIndex++;
-                                    if (lineIndex < lines.length) {
-                                        setTimeout(typeLine, 500); // Wait a bit before starting the next line
-                                    }
-                                }
-                            }, speed);
-                        }
-                    }
-
-                    typeLine();
-                }
-
-                const typingElement = aiMessageDiv.querySelector('.typing-effect');
-                typeWriter(typingElement, aiResponse, 50); // Adjust speed as needed
+                typeWriter(aiMessageDiv, aiResponse, 50); // Adjust speed as needed
             } else {
                 throw new Error('No AI response found in the data');
             }
