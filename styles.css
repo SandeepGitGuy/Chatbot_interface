@@ -98,8 +98,7 @@ body {
 
 .typing-effect {
     overflow: hidden; /* Ensures text doesn't overflow */
-    white-space: nowrap; /* Keeps text on a single line */
-    border-right: 2px solid black; /* Cursor effect */
+    white-space: pre-wrap; /* Allows text to wrap onto the next line */
     animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
     font-family: Arial, sans-serif;
     font-size: 16px;
@@ -107,5 +106,6 @@ body {
 
 @keyframes blink-caret {
     from, to { border-color: transparent; }
-    50% { border-color: black; }
+    50% { border-color: transparent; } /* No visible caret */
 }
+
