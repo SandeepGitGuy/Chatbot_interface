@@ -20,8 +20,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    margin-left: auto; /* Pushes the chat container to the right */ /* Ensures no extra margin on the right */
-    margin-right: 20px;
+    margin-left: auto; /* Pushes the chat container to the right */
+    margin-right: 20px; /* Adds space on the right side */
 }
 
 .chat-header {
@@ -93,29 +93,22 @@ body {
 }
 
 .typing-effect {
-    overflow: hidden;
-    border-right: 2px solid transparent; /* This creates a blinking cursor effect */
-    white-space: pre-wrap;
-    margin: 0;
-    line-height: 1.5;
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: black; }
+    white-space: pre-wrap; /* Allows text to wrap onto the next line */
+    overflow: hidden; /* Ensures text doesn't overflow */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
 }
 
 .typing-line {
-    display: none;
+    display: block;
+    white-space: pre-wrap; /* Allows text to wrap naturally */
 }
 
 .typing-line.visible {
-    display: block;
-    animation: typing 1.5s steps(40, end);
+    animation: typing 1.5s steps(40, end) both; /* Adjust duration and steps as needed */
 }
 
 @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
 }
-
